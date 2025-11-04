@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación Interactiva: Diccionarios en Python</title>
+    <style>
+        /* === ESTILOS GLOBALES Y DE ESCRITORIO === */
+        body {
+            font-family: Arial, sans-serif; background-color: #f0f0f0; margin: 0;
+            padding: 40px; display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; box-sizing: border-box; transition: padding 0.3s ease;
+        }
+
+        .slideshow-container { position: relative; width: 90%; max-width: 960px; }
+        
+        .slide {
+            display: none; background-color: #fff; border: 1px solid #ccc;
+            height: 540px; padding: 40px 60px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            flex-direction: column; justify-content: center; position: relative;
+            box-sizing: border-box;
+        }
+
+        .fade { animation-name: fade; animation-duration: 0.5s; }
+        @keyframes fade { from {opacity: .4} to {opacity: 1} }
+
+        .prev, .next {
+            cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%);
+            width: 50px; height: 50px; background-color: #cccccc; color: #333;
+            border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex; justify-content: center; align-items: center;
+            font-weight: bold; font-size: 24px; transition: all 0.3s ease;
+            user-select: none; z-index: 10;
+        }
+
+        .prev { left: -70px; }
+        .next { right: -70px; }
+        .prev:hover, .next:hover { background-color: #aaaaaa; }
+
+        .slide h1 { font-size: 3.5em; text-align: center; border-bottom: 4px solid #11a800; padding-bottom: 20px; color: #005A9C; }
+        .slide h2 { font-size: 2.8em; margin-top: 0; margin-bottom: 30px; text-align: center; color: #005A9C; }
+        .single-content { text-align: center; }
+        .single-content p { font-size: 1.5em; color: #444; }
+        .single-content pre { font-size: 1.4em; display: inline-block; text-align: left; max-width: 100%; }
+        pre { background-color: #2d3436; color: #fff; padding: 15px; border-radius: 5px; font-size: 1.1em; white-space: pre-wrap; }
+        .footer { position: absolute; bottom: 20px; right: 40px; font-size: 1em; color: #888; }
+
+        /* === MEDIA QUERIES === */
+        @media screen and (max-width: 768px) {
+            body { padding: 15px; }
+            .slideshow-container { width: 100%; padding-bottom: 75px; }
+            .slide { height: auto; min-height: 75vh; padding: 20px 25px; }
+            .prev, .next { top: auto; bottom: 15px; width: 45px; height: 45px; }
+            .prev { left: 50%; transform: translateX(-110%); }
+            .next { left: 50%; transform: translateX(10%); right: auto; }
+            .slide h1 { font-size: 2.2em; }
+            .slide h2 { font-size: 1.8em; }
+            .single-content p { font-size: 1.1em; }
+            .single-content pre { font-size: 1em; }
+            .footer { font-size: 0.8em; right: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slideshow-container">
+        
+        <div class="slide fade">
+            <h1>Cheat Sheet de Python</h1>
+            <h2 style="color:#333; border:none;">Diccionarios</h2>
+            <div class="footer">1 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>¿Qué es un Diccionario?</h2>
+            <div class="single-content"><p>Una colección no ordenada de pares <code>clave: valor</code>. Son modificables y no permiten claves duplicadas.</p></div>
+            <div class="footer">2 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Crear un Diccionario</h2>
+            <div class="single-content"><p>Se define con llaves <code>{}</code>, con cada par separado por dos puntos.</p><pre><code>persona = {
+    "nombre": "Ana",
+    "edad": 25,
+    "ciudad": "Madrid"
+}</code></pre></div>
+            <div class="footer">3 / 16</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Acceder a un Valor</h2>
+            <div class="single-content"><p>Se accede al valor usando su clave entre corchetes.</p><pre><code>persona = {"nombre": "Ana", "edad": 25}
+print(persona["nombre"]) # 'Ana'</code></pre></div>
+            <div class="footer">4 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Acceso Seguro: <code>.get()</code></h2>
+            <div class="single-content"><p>Devuelve <code>None</code> (o un valor por defecto) si la clave no existe, evitando errores.</p><pre><code>persona = {"nombre": "Ana"}
+print(persona.get("edad")) # None
+print(persona.get("edad", 18)) # 18 (valor por defecto)</code></pre></div>
+            <div class="footer">5 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Modificar un Valor</h2>
+            <div class="single-content"><p>Se reasigna un nuevo valor a una clave existente.</p><pre><code>persona = {"nombre": "Ana", "edad": 25}
+persona["edad"] = 26
+print(persona) # {'nombre': 'Ana', 'edad': 26}</code></pre></div>
+            <div class="footer">6 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Añadir un Par Clave-Valor</h2>
+            <div class="single-content"><p>Se asigna un valor a una clave que no existe en el diccionario.</p><pre><code>persona = {"nombre": "Ana"}
+persona["profesion"] = "Ingeniera"
+print(persona)</code></pre></div>
+            <div class="footer">7 / 16</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Eliminar: <code>del</code></h2>
+            <div class="single-content"><p>Elimina un par clave-valor usando la palabra clave `del`.</p><pre><code>persona = {"nombre": "Ana", "edad": 25}
+del persona["edad"]
+print(persona) # {'nombre': 'Ana'}</code></pre></div>
+            <div class="footer">8 / 16</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Eliminar: <code>.pop()</code></h2>
+            <div class="single-content"><p>Elimina un par y devuelve el valor eliminado.</p><pre><code>persona = {"nombre": "Ana", "edad": 25}
+edad = persona.pop("edad")
+print(edad) # 25
+print(persona) # {'nombre': 'Ana'}</code></pre></div>
+            <div class="footer">9 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Obtener Claves: <code>.keys()</code></h2>
+            <div class="single-content"><p>Devuelve un objeto iterable con todas las claves del diccionario.</p><pre><code>persona = {"nombre": "Ana", "edad": 25}
+print(persona.keys()) # dict_keys(['nombre', 'edad'])</code></pre></div>
+            <div class="footer">10 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Obtener Valores: <code>.values()</code></h2>
+            <div class="single-content"><p>Devuelve un objeto iterable con todos los valores.</p><pre><code>persona = {"nombre": "Ana", "edad": 25}
+print(persona.values()) # dict_values(['Ana', 25])</code></pre></div>
+            <div class="footer">11 / 16</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Obtener Items: <code>.items()</code></h2>
+            <div class="single-content"><p>Devuelve un objeto iterable con pares (clave, valor) como tuplas.</p><pre><code>persona = {"nombre": "Ana", "edad": 25}
+print(persona.items())
+# dict_items([('nombre', 'Ana'), ('edad', 25)])</code></pre></div>
+            <div class="footer">12 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Recorrer Claves (Loop)</h2>
+            <div class="single-content"><p>Por defecto, un `for` sobre un diccionario recorre sus claves.</p><pre><code>for clave in persona:
+    print(clave) # nombre, edad</code></pre></div>
+            <div class="footer">13 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Recorrer Items (Loop)</h2>
+            <div class="single-content"><p>La forma más común de recorrer un diccionario para obtener clave y valor.</p><pre><code>for clave, valor in persona.items():
+    print(f"{clave}: {valor}")</code></pre></div>
+            <div class="footer">14 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Operador <code>in</code></h2>
+            <div class="single-content"><p>Verifica si una clave existe en el diccionario. Es muy rápido.</p><pre><code>if "nombre" in persona:
+    print("La clave 'nombre' existe.")</code></pre></div>
+            <div class="footer">15 / 16</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Función <code>len()</code></h2>
+            <div class="single-content"><p>Devuelve el número de pares clave-valor.</p><pre><code>print(len(persona)) # 2</code></pre></div>
+            <div class="footer">16 / 16</div>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <script>
+        let slideIndex = 1; showSlides(slideIndex);
+        function plusSlides(n) { showSlides(slideIndex += n); }
+        function showSlides(n) {
+            let i, slides = document.getElementsByClassName("slide");
+            if (n > slides.length) { slideIndex = 1 } 
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+            slides[slideIndex - 1].style.display = "flex";
+        }
+    </script>
+
+</body>
+</html>
